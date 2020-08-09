@@ -29,11 +29,13 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./src/assets/fontawesome-5.14.0/css/all.min.css",
               "src/styles.scss"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./src/assets/fontawesome-5.14.0/js/all.min.js"
             ]
           },
           "configurations": {
