@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
         user.id = response.id;
         AuthGuard.saveUser(user);
         this.isLoading = false;
-        // this.router.navigate(['/tabs']);
+        // this.router.navigate(['/routes']);
       }, error => {
         console.log(error);
         this.isLoading = false;
