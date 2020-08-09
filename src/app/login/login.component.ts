@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
    * Formulario a ser mostrado.
    */
   public loginForm: FormGroup;
+  public hidePassword = true;
   /**
    * Variable privada para guardar el valor de inicio de sesión cargando.
    * Esta variable solo puede ser asignada desde la funcion `set isLoading(isLoading: boolean)`

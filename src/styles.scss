@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+// @import '~@angular/material/prebuilt-themes/purple-green.css' (prefers-color-scheme: dark);  
+
+// @media (prefers-color-scheme: light) {
+//     @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+// }
+
+// @media (prefers-color-scheme: dark) {
+//     @import '~@angular/material/prebuilt-themes/purple-green.css';
+// }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
