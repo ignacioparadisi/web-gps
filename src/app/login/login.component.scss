@@ -1,0 +1,43 @@
+.background {
+    background: url("../../assets/shapes.svg") no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+
+.form-container {
+    display: flex;
+    height: 100vh;
+}
+
+h1 {
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+}
+
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+
+    .error {
+        margin: -10px 0px 10px 0px;
+        color: red;
+    }
+}
+
+.btn-tertiary {
+    background: #6A4BF6;
+    color: white;
+}
+
+.buttons {
+    button {
+        margin-top: 15px;
+    }
+}
