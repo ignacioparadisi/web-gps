@@ -32,8 +32,8 @@
             <!-- Birthday Field -->
             <mat-form-field appearance="outline">
                 <mat-label>Fecha de Nacimiento</mat-label>
-                <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="birthday" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <input matInput placeholder="MM/DD/AAAA" [max]="maxDate" [matDatepicker]="picker" formControlName="birthday" required>
+                <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="isLoading"></mat-datepicker-toggle>
                 <mat-datepicker #picker startView="multi-year"></mat-datepicker>
                 <mat-hint>
                     <div *ngFor="let error of validationMessages.birthday">
@@ -75,7 +75,7 @@
                 <mat-label>Contraseña</mat-label>
                 <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
                 <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
-                    [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hidePassword">
+                    [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hidePassword" [disabled]="isLoading">
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
                 <mat-hint>
@@ -93,7 +93,7 @@
                 <input matInput [type]="hideValidPassword ? 'password' : 'text'" formControlName="validPassword"
                     required>
                 <button mat-icon-button matSuffix (click)="hideValidPassword = !hideValidPassword"
-                    [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hideValidPassword">
+                    [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hideValidPassword" [disabled]="isLoading">
                     <mat-icon>{{hideValidPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
                 <mat-hint>

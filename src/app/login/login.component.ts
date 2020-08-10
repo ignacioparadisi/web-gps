@@ -74,14 +74,8 @@ export class LoginComponent implements OnInit {
     var message = '';
     if (error.status == 404) {
       message = 'El correo o la contraseña son inválidos.';
-      // this.loginForm.get('email').setErrors({
-      //   incorrect: true
-      // });
-      // this.loginForm.get('password').setErrors({
-      //   incorrect: true
-      // });
     } else {
-      message = 'Hugo un error al conectarse al servidor.';
+      message = 'Hugo un error al conectarse con el servidor.';
     }
     this.snackBar.open(message, 'Cerrar', {
       duration: 5000

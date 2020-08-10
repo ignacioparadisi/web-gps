@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
         AuthGuard.loggedIn = (user !== undefined && user !== null);
 
         if (AuthGuard.loggedIn) {
-            this.router.navigate(['/tabs']);
+            this.router.navigate(['/routes']);
         } else {
             this.router.navigate(['/login']);
         }
@@ -61,7 +61,7 @@ export class LoginGuard implements CanActivate {
 
     public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         if (this.authGuard.getGuardAuthentication()) {
-            this.router.navigate(['/tabs']);
+            this.router.navigate(['/routes']);
         }
         return true;
     }

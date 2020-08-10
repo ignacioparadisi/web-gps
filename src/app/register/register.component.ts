@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthGuard } from 'src/resources/auth-guard';
 import { UserService } from 'src/services/user.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,6 @@ export class RegisterComponent implements OnInit {
    * Se retorna el valor que esta guardado en la variable privada.
    */
   get isLoading(): boolean { return this._isLoading };
-  private loadingView;
   public validationMessages = {
     name: [],
     email: [],
@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
+    private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<RegisterComponent>) { }
 
     ngOnInit(): void {
@@ -65,30 +66,26 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   * Presenta una vista de carga mientras se envian los datos al servidor.
-   */
-  private async presentLoading() {
-    // this.loadingView = await this.loadingController.create({
-    //   message: 'Creando cuenta'
-    // });
-    // await this.loadingView.present();
-  }
-
-  private async dismissLoading() {
-    await this.loadingView.dismiss();
-  }
-
-  /**
    * Presenta una alerta de error
    */
-  async presentErrorAlert() {
-    // const alert = await this.alertController.create({
-    //   header: 'Error',
-    //   message: 'Hubo un error al crear el usuario.',
-    //   buttons: ['Aceptar']
-    // });
-
-    // await alert.present();
+  async presentErrorAlert(error) {
+    var message = '';
+    if (error.status == 400) {
+      message = 'Error al crear el usuario.'
+      if (error.error.email) {
+        this.validationMessages.email.push('El email ingresado ya existe en el sistema.');
+        this.registerForm.get('email').setErrors({ incorrect: true} );
+      }
+      if (error.error.cedula) {
+        this.validationMessages.documentId.push('La cédula ingresada ya existe en el sistema.');
+        this.registerForm.get('documentId').setErrors({ incorrect: true} );
+      }
+    }  else {
+      message = 'Hugo un error al conectarse con el servidor.';
+    }
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000
+    });
   }
 
   /**
@@ -98,7 +95,6 @@ export class RegisterComponent implements OnInit {
     this.clearValidationMessages();
     this.validateFields();
     if (this.registerForm.valid) {
-      this.presentLoading();
       const user = {
         full_name: this.registerForm.get('name').value,
         email: this.registerForm.get('email').value,
@@ -115,12 +111,15 @@ export class RegisterComponent implements OnInit {
           id: response.id,
           email: response.email
         };
-        // AuthGuard.saveUser(user);
-        // this.router.navigate(['/tabs']);
+        AuthGuard.saveUser(user);
+        this.snackBar.open('Cuenta creada safistactoriamente.', null, {
+          duration: 3000
+        });
+        this.router.navigate(['/routes']);
       }, error => {
         this.isLoading = false;
         console.log(error);
-        this.presentErrorAlert();
+        this.presentErrorAlert(error);
       });
     }
   }
@@ -196,6 +195,8 @@ export class RegisterComponent implements OnInit {
       if (this.registerForm.get('password').value !== this.registerForm.get('validPassword').value) {
         this.validationMessages.password.push('Las contraseñas no coinciden');
         this.validationMessages.validPassword.push('Las contraseñas no coinciden');
+        this.registerForm.get('password').setErrors({ incorrect: true} )
+        this.registerForm.get('validPassword').setErrors({ incorrect: true} )
       }
     }
     if (passwordErrors) {

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher }  from '@angular/cdk/layout';
+import { AuthGuard } from 'src/resources/auth-guard';
 
 @Component({
   selector: 'app-routes',
@@ -19,6 +20,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(AuthGuard.getUser());
   }
 
   ngOnDestroy(): void {
