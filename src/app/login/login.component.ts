@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { AuthGuard } from 'src/resources/auth-guard';
 import { UserService } from 'src/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,6 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   /**
    * Mensajes de error para validar el email y la contraseña.
    */
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    public dialog: MatDialog,
     // private modalController: ModalController,
     // private loadingController: LoadingController,
     // private alertController: AlertController
@@ -61,6 +63,9 @@ export class LoginComponent implements OnInit {
    */
   async presentSignUpModal() {
     console.log('CREAR CUENTA');
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      maxWidth: '700px'
+    });
     // const modal = await this.modalController.create({
     //   component: RegisterPage
     // });

@@ -38,11 +38,11 @@
                         <span *ngIf="!isLoading">INICIAR SESIÓN</span>
                         <div *ngIf="isLoading" class="d-flex justify-content-center">
                             <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
+                                <span class="sr-only">Cargando...</span>
                             </div>
                         </div>
                     </button>
-                    <button mat-raised-button type="button" class="btn-tertiary btn-block" (click)="presentSignUpModal()"
+                    <button mat-button type="button" class="btn-block" color="primary" (click)="presentSignUpModal()"
                         [disabled]="isLoading">CREAR CUENTA</button>
                 </div>
             </form>
