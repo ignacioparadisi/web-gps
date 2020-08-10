@@ -6,6 +6,7 @@ import { AuthGuard } from 'src/resources/auth-guard';
 import { UserService } from 'src/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -44,10 +45,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    public dialog: MatDialog,
-    // private modalController: ModalController,
-    // private loadingController: LoadingController,
-    // private alertController: AlertController
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private router: Router) { 
       this.loginForm = new FormGroup({
         email: new FormControl({ value: '', disabled: false }, [Validators.email, Validators.required]),
@@ -66,23 +65,27 @@ export class LoginComponent implements OnInit {
     const dialogRef = this.dialog.open(RegisterComponent, {
       maxWidth: '700px'
     });
-    // const modal = await this.modalController.create({
-    //   component: RegisterPage
-    // });
-    // return await modal.present();
   }
 
   /**
    * Presenta una alerta de error
    */
-  async presentErrorAlert() {
-    // const alert = await this.alertController.create({
-    //   header: 'Credenciales inválidas',
-    //   message: 'El correo o la contraseña son inválidos.',
-    //   buttons: ['Aceptar']
-    // });
-
-    // await alert.present();
+  async presentErrorAlert(error) {
+    var message = '';
+    if (error.status == 404) {
+      message = 'El correo o la contraseña son inválidos.';
+      // this.loginForm.get('email').setErrors({
+      //   incorrect: true
+      // });
+      // this.loginForm.get('password').setErrors({
+      //   incorrect: true
+      // });
+    } else {
+      message = 'Hugo un error al conectarse al servidor.';
+    }
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000
+    });
   }
 
   /**
@@ -107,11 +110,11 @@ export class LoginComponent implements OnInit {
         user.id = response.id;
         AuthGuard.saveUser(user);
         this.isLoading = false;
-        // this.router.navigate(['/routes']);
+        this.router.navigate(['/routes']);
       }, error => {
         console.log(error);
         this.isLoading = false;
-        this.presentErrorAlert();
+        this.presentErrorAlert(error);
       });
     }
   }
