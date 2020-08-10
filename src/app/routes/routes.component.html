@@ -1,27 +1,41 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-<mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()" [hidden]="!mobileQuery.matches">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="example-app-name">Rutas</h1>
-</mat-toolbar>
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()" [hidden]="!mobileQuery.matches">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Rutas</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu>
+            <button mat-menu-item>
+                <mat-icon>person</mat-icon>
+                <span>Ver Perfil</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon><i class="fas fa-sign-out-alt"></i></mat-icon>
+                <span>Cerrar Sesión</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar>
 
-<mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav class="example-sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-        fixedTopGap="56" [opened]="!mobileQuery.matches">
-        <mat-nav-list>
-            <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
-        </mat-nav-list>
-    </mat-sidenav>
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav class="example-sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'"
+            [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="!mobileQuery.matches">
+            <mat-nav-list>
+                <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+            </mat-nav-list>
+        </mat-sidenav>
 
-    <mat-sidenav-content>
-        <div class="not-selected-message-container align-items-center">
-            <div class="not-selected-message text-center">
-                <h2>Ninguna Ruta Seleccionada</h2>
-                <p>Por favor seleccione una ruta.</p>
+        <mat-sidenav-content>
+            <div class="not-selected-message-container align-items-center">
+                <div class="not-selected-message text-center">
+                    <h2>Ninguna Ruta Seleccionada</h2>
+                    <p>Por favor seleccione una ruta.</p>
+                </div>
             </div>
-        </div>
-       
-    </mat-sidenav-content>
-</mat-sidenav-container>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

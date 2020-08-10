@@ -34,6 +34,10 @@ h1.example-app-name {
     min-width: 200px;
 }
 
+.spacer {
+    flex: 1 1 auto;
+}
+
 .not-selected-message-container {
     display: flex;
     height: 100%;
