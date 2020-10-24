@@ -23,7 +23,10 @@
 
     <div *ngIf="route && !isLoading && !showError">
         <agm-map [latitude]="origin.lat" [longitude]="origin.lng">
-            <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"></agm-direction>
+            <agm-marker [latitude]="origin.lat" [longitude]="origin.lng"></agm-marker>
+            <agm-marker [latitude]="destination.lat" [longitude]="destination.lng"></agm-marker>
+            <agm-marker *ngFor="let point of waypoints" [latitude]="point.location.lat" [longitude]="point.location.lng"></agm-marker>
+            <agm-direction [origin]="origin" [destination]="destination"></agm-direction>
         </agm-map>
     </div>
 </div>
