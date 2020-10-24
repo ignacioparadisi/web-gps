@@ -14,6 +14,11 @@ export class MapComponent implements OnInit, OnChanges {
   showError = false;
   isLoading = false;
 
+  title = '';
+  waypoints: any[] = [];
+  origin: any;
+  destination: any;
+
   constructor(private routeService: RouteService) { 
   }
 
@@ -31,6 +36,28 @@ export class MapComponent implements OnInit, OnChanges {
     this.routeService.getRoute(this.route.id).subscribe(route => {
       this.isLoading = false;
       console.log(route);
+      this.title = route.name;
+      this.origin = {
+        lat: Number(route.points[0].latitude),
+        lng: Number(route.points[0].longitude),
+      };
+      this.destination = {
+        lat: Number(route.points[route.points.length - 1].latitude),
+        lng: Number(route.points[route.points.length - 1].longitude),
+      };
+      let points = route.points.slice(1, -1);
+      this.waypoints = points.map(point => {
+        return {
+          location: {
+            lat: Number(point.latitude),
+            lng: Number(point.longitude)
+          }
+        }
+      });
+
+      console.log(this.origin);
+      console.log(this.destination);
+      console.log(this.waypoints)
     }, error => {
       this.isLoading = false;
       this.showError = true;

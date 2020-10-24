@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RoutesRoutingModule } from './routes-routing.module';
 import { RoutesComponent } from './routes.component';
 import { MapComponent } from '../map/map.component';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 
 
 @NgModule({
@@ -23,7 +25,11 @@ import { MapComponent } from '../map/map.component';
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAfv3J_DFl8qNO-xgRgBGpDxas132sRE-Q'
+    }),
+    AgmDirectionModule
   ]
 })
 export class RoutesModule { }

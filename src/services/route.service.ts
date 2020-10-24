@@ -28,7 +28,7 @@ export class RouteService {
   public getRoute(id: number) {
     const localUser = AuthGuard.getUser();
     if (localUser !== null) {
-      return this.http.get<Route[]>(`https://community-service-ucab.herokuapp.com/api/users/${localUser.id}/routes/${id}`);
+      return this.http.get<Route>(`https://community-service-ucab.herokuapp.com/api/users/${localUser.id}/routes/${id}`);
     } else {
       return null;
     }

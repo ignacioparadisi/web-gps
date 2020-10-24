@@ -22,7 +22,9 @@
     </div> 
 
     <div *ngIf="route && !isLoading && !showError">
-        <h1>{{ route.name }}</h1>
+        <agm-map [latitude]="origin.lat" [longitude]="origin.lng">
+            <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"></agm-direction>
+        </agm-map>
     </div>
 </div>
  
