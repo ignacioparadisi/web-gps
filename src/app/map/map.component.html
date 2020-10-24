@@ -1,0 +1,28 @@
+
+<div class="map-container">
+    <div *ngIf="!route && !showError && !isLoading" class="not-selected-message-container align-items-center">
+        <div class="not-selected-message text-center">
+            <h2>Ninguna Ruta Seleccionada</h2>
+            <p>Por favor seleccione una ruta para visualizarla en el mapa</p>
+        </div>
+    </div>
+
+    <div *ngIf="isLoading" class="d-flex justify-content-center not-selected-message-container align-items-center">
+        <div class="spinner-border" role="status" style="margin-top: 20px">
+            <span class="sr-only">Cargando...</span>
+        </div>
+    </div>
+
+    <div *ngIf="showError" class="not-selected-message-container align-items-center">
+        <div class="text-center" style="margin: 0 auto">
+            <h3>Hubo un error obteniendo la ruta</h3>
+            <button mat-raised-button type="button" color="primary" (click)="fetchRoute()"
+                [disabled]="isLoading">Intentar de nuevo</button>
+        </div>
+    </div> 
+
+    <div *ngIf="route && !isLoading && !showError">
+        <h1>{{ route.name }}</h1>
+    </div>
+</div>
+ 

@@ -1,0 +1,22 @@
+.map-container {
+    height: 100vh;
+}
+
+.not-selected-message-container {
+    display: flex;
+    height: 100%;
+    width: 100;
+}
+
+.not-selected-message {
+    margin: 0 auto;
+
+    h2 {
+        margin: 0;
+    }
+
+    p {
+        color: #707070;
+        margin: 0;
+    }
+}

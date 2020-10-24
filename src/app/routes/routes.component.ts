@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher }  from '@angular/cdk/layout';
 import { AuthGuard } from 'src/resources/auth-guard';
-import { Router } from '@angular/router';
+import { ChildActivationStart, Router } from '@angular/router';
+import { RouteService } from 'src/services/route.service';
+import { Route } from 'src/classes/route';
 
 @Component({
   selector: 'app-routes',
@@ -10,27 +12,47 @@ import { Router } from '@angular/router';
 })
 export class RoutesComponent implements OnInit, OnDestroy {
 
+  selectedRoute: Route = null;
+  isLoading = false;
+  showError = false;
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
-  fillerNav = Array.from({length: 3}, (_, i) => `Ruta ${i + 1}`);
+  routes = [];
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private routeService: RouteService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
   ngOnInit(): void {
-    console.log(AuthGuard.getUser());
+    console.log(`User: ${AuthGuard.getUser()}`);
+    this.fetchRoutes();
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
   }
 
   public logout() {
     AuthGuard.removeUser();
     this.router.navigate(['/login']);
+  }
+
+  public fetchRoutes() {
+    this.showError = false;
+    this.isLoading = true;
+    this.routeService.getRoutesForUser().subscribe(routes => {
+      this.isLoading = false;
+      this.routes = routes;
+    }, error => {
+      this.isLoading = false;
+      this.showError = true;
+    });
+  }
+
+  public didSelectRoute(route: Route) {
+    this.selectedRoute = route;
   }
 
 }

@@ -10,10 +10,11 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { RoutesRoutingModule } from './routes-routing.module';
 import { RoutesComponent } from './routes.component';
+import { MapComponent } from '../map/map.component';
 
 
 @NgModule({
-  declarations: [RoutesComponent],
+  declarations: [RoutesComponent, MapComponent],
   imports: [
     CommonModule,
     RoutesRoutingModule,

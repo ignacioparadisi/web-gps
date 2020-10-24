@@ -23,19 +23,25 @@
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
         <mat-sidenav #snav class="example-sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'"
             [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="!mobileQuery.matches">
-            <mat-nav-list>
-                <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+            <div *ngIf="isLoading" class="d-flex justify-content-center not-selected-message-container align-items-center">
+                <div class="spinner-border" role="status" style="margin-top: 20px">
+                    <span class="sr-only">Cargando...</span>
+                </div>
+            </div>   
+            <div *ngIf="showError" class="not-selected-message-container align-items-center">
+                <div class="text-center" style="margin-left: 20px; margin-right: 20px">
+                    <h3>Hubo un error<br>obteniendo las rutas</h3>
+                    <button mat-raised-button type="button" color="primary" (click)="fetchRoutes()"
+                        [disabled]="isLoading">Intentar de nuevo</button>
+                </div>
+            </div>   
+            <mat-nav-list *ngIf="!isLoading && !showError">
+                <a mat-list-item routerLink="." *ngFor="let route of routes" (click)="didSelectRoute(route)">{{route.name}}</a>
             </mat-nav-list>
         </mat-sidenav>
 
         <mat-sidenav-content>
-            <div class="not-selected-message-container align-items-center">
-                <div class="not-selected-message text-center">
-                    <h2>Ninguna Ruta Seleccionada</h2>
-                    <p>Por favor seleccione una ruta.</p>
-                </div>
-            </div>
-
+            <app-map [route]="selectedRoute"></app-map>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
