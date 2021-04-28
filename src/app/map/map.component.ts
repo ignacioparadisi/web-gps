@@ -31,7 +31,6 @@ export class MapComponent implements OnInit, OnChanges {
 
   fetchRoute() {
     if (!this.route) { return }
-    this.isLoading = true;
     this.showError = false;
     this.title = this.route.name;
     this.origin = {
