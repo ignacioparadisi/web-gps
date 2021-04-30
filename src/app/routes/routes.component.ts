@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher }  from '@angular/cdk/layout';
 import { AuthGuard } from 'src/resources/auth-guard';
-import { ChildActivationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouteService } from 'src/services/route.service';
 import { Route } from 'src/classes/route';
 
@@ -11,7 +11,6 @@ import { Route } from 'src/classes/route';
   styleUrls: ['./routes.component.scss']
 })
 export class RoutesComponent implements OnInit, OnDestroy {
-
   selectedRoute: Route = null;
   isLoading = false;
   showError = false;
