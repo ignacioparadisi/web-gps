@@ -91,9 +91,9 @@ export class MapComponent implements OnInit, OnChanges {
       if (String(status) == "OK") {
         this.directionsDisplay.setDirections(response);
         this.ref.detectChanges();
+      } else {
+        this.showError = true;
       }
-      console.log(response);
-      console.log(status);
     });
   }
 
