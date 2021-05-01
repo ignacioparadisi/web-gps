@@ -1,0 +1,123 @@
+<div class="container">
+    <h1 class="text-center">Perfil</h1>
+    <div class="form-container align-items-center">
+
+        <form [formGroup]="accountForm">
+            <!-- Name Field -->
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre y Apellido</mat-label>
+                <input matInput formControlName="name" [readonly]="!isEditEnabled" required>
+                <mat-hint>
+                    <div *ngFor="let error of validationMessages.name">
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error }}
+                        </div>
+                    </div>
+                </mat-hint>
+            </mat-form-field>
+
+            <!-- Document ID Field -->
+            <mat-form-field appearance="outline">
+                <mat-label>Cédula</mat-label>
+                <input matInput type="number" formControlName="documentId" [readonly]="!isEditEnabled" required>
+                <mat-hint>
+                    <div *ngFor="let error of validationMessages.documentId">
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error }}
+                        </div>
+                    </div>
+                </mat-hint>
+            </mat-form-field>
+
+            <!-- Birthday Field -->
+            <mat-form-field appearance="outline">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input matInput formControlName="birthday" [matDatepicker]="picker" [readonly]="!isEditEnabled"
+                    required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint>
+                    <div *ngFor="let error of validationMessages.birthday">
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error }}
+                        </div>
+                    </div>
+                </mat-hint>
+            </mat-form-field>
+
+            <!-- Phone Field -->
+            <mat-form-field appearance="outline">
+                <mat-label>Número telefónico</mat-label>
+                <input matInput type="tel" formControlName="phone" [readonly]="!isEditEnabled" required>
+                <mat-hint>
+                    <div *ngFor="let error of validationMessages.phone">
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error }}
+                        </div>
+                    </div>
+                </mat-hint>
+            </mat-form-field>
+
+            <!-- Email Field -->
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput type="email" formControlName="email" [readonly]="!isEditEnabled" required>
+                <mat-hint>
+                    <div *ngFor="let error of validationMessages.email">
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error }}
+                        </div>
+                    </div>
+                </mat-hint>
+            </mat-form-field>
+
+            <!-- Password Field -->
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                    [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hidePassword" [disabled]="isLoading">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint>
+                    <div *ngFor="let error of validationMessages.password">
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error }}
+                        </div>
+                    </div>
+                </mat-hint>
+            </mat-form-field>
+
+            <!-- Password Validation Field -->
+            <mat-form-field appearance="outline">
+                <mat-label>Comprobar Contraseña</mat-label>
+                <input matInput [type]="hideValidPassword ? 'password' : 'text'" formControlName="validPassword"
+                    required>
+                <button mat-icon-button matSuffix (click)="hideValidPassword = !hideValidPassword"
+                    [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hideValidPassword"
+                    [disabled]="isLoading">
+                    <mat-icon>{{hideValidPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint>
+                    <div *ngFor="let error of validationMessages.validPassword">
+                        <div class="error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error }}
+                        </div>
+                    </div>
+                </mat-hint>
+            </mat-form-field>
+
+            <!-- Create Account Button -->
+            <div class="buttons">
+                <button mat-raised-button type="submit" class="btn-block" color="primary" [disabled]="isLoading">
+                    <span *ngIf="!isLoading">Guardar</span>
+                    <div *ngIf="isLoading" class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Cargando...</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

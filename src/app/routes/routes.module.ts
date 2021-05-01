@@ -7,11 +7,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { RoutesRoutingModule } from './routes-routing.module';
 import { RoutesComponent } from './routes.component';
 import { MapComponent } from '../map/map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { AccountModule } from '../account/account.module';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatButtonModule,
     MatListModule,
     MatMenuModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    MatDialogModule,
+    AccountModule
   ]
 })
 export class RoutesModule { }

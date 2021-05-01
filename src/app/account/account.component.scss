@@ -1,0 +1,33 @@
+// .form-container {
+//     display: flex;
+//     height: 100vh;
+// }
+
+mat-form-field {
+    width: 100%;
+}
+
+h1 {
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+
+    .error {
+        color: red;
+    }
+}
+
+.btn-tertiary {
+    background: #6A4BF6;
+    color: white;
+}
+
+.buttons {
+    button {
+        margin-top: 15px;
+    }
+}

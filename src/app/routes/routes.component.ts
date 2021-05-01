@@ -4,6 +4,8 @@ import { AuthGuard } from 'src/resources/auth-guard';
 import { Router } from '@angular/router';
 import { RouteService } from 'src/services/route.service';
 import { Route } from 'src/classes/route';
+import { MatDialog } from '@angular/material/dialog';
+import { AccountComponent } from '../account/account.component';
 
 @Component({
   selector: 'app-routes',
@@ -18,7 +20,11 @@ export class RoutesComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   routes = [];
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private routeService: RouteService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, 
+    media: MediaMatcher, 
+    private router: Router, 
+    private routeService: RouteService,
+    private dialog: MatDialog) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener("change", this._mobileQueryListener);
@@ -31,6 +37,12 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
+  }
+
+  public goToAccount() {
+    const dialogRef = this.dialog.open(AccountComponent, {
+      maxWidth: '700px'
+    });
   }
 
   public logout() {
